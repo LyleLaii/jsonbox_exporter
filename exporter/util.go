@@ -196,6 +196,7 @@ func FetchJson(ctx context.Context, logger log.Logger, module string, endpoint s
 	}
 
 	data, err := ioutil.ReadAll(resp.Body)
+	level.Debug(logger).Log("msg", fmt.Sprintf("Request %s", endpoint), "data", data)
 	if err != nil {
 		return nil, -1, err
 	}

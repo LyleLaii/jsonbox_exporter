@@ -38,8 +38,6 @@ type MetricType string
 const (
 	ValueScrape  MetricType = "value" // default
 	ObjectScrape MetricType = "object"
-	TemplatizeContent string = "templatize"
-	FormdataContent string = "formdata"
 )
 
 // Config contains metrics and headers defining a configuration
