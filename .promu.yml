@@ -1,0 +1,20 @@
+go:
+  # This must match .circle/config.yml.
+  version: 1.14
+  cgo: false
+repository:
+  path: jsonbox_exporter
+  prefix: .
+build:
+  binaries:
+    - name: jsonbox_exporter
+      path: ./cmd
+  flags: -a -trimpath
+  ldflags: |
+    -X github.com/prometheus/common/version.Version={{.Version}}
+    -X github.com/prometheus/common/version.Revision={{.Revision}}
+    -X github.com/prometheus/common/version.Branch={{.Branch}}
+    -X github.com/prometheus/common/version.BuildUser={{user}}
+    -X github.com/prometheus/common/version.BuildDate={{date "20060102-15:04:05"}}
+crossbuild:
+  platforms:
