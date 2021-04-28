@@ -1,0 +1,14 @@
+[Unit]
+Description=jsonbox_exporter
+After=network.target
+
+[Service]
+EnvironmentFile=/etc/sysconfig/jsonbox_exporter
+ExecStart=/usr/local/bin/jsonbox_exporter $OPTIONS
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s QUIT $MAINPID
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+
