@@ -89,9 +89,6 @@ test_example_value_count{environment="beta",id="id-C"} 3
 # HELP test_request_duration Request target duration by Millisecond
 # TYPE test_request_duration untyped
 test_request_duration 6
-# HELP test_request_status Request target status
-# TYPE test_request_status untyped
-test_request_status 1
 
 # Abandoned This
 test_request_status{target="http://localhost:8000/example/data.json"} 1

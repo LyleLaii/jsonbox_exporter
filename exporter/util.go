@@ -103,17 +103,6 @@ func CreateMetricsList(c config.Config, module string) ([]JsonMetric, error) {
 func CreateStaticMetricsList(module string) ([]StaticMetric, error) {
 	var metrics []StaticMetric
 	staticMetric := StaticMetric{
-		Name: "status",
-		Desc: prometheus.NewDesc(
-				module + "_request_status",
-				"Request target status",
-				[]string {},
-				nil,
-				),
-	}
-	metrics = append(metrics, staticMetric)
-
-	staticMetric = StaticMetric{
 		Name: "duration",
 		Desc: prometheus.NewDesc(
 			module + "_request_duration",

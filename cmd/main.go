@@ -102,17 +102,11 @@ func probeHandler(w http.ResponseWriter, r *http.Request, logger log.Logger, con
 
 	data, duration, err := exporter.FetchJson(ctx, logger, moduleName, target, config, r.URL.Query())
 	if err != nil {
-		level.Warn(logger).Log("Failed to fetch JSON response. TARGET: "+target+", ERROR: "+err.Error())
-		//http.Error(w, "Failed to fetch JSON response. TARGET: "+target+", ERROR: "+err.Error(), http.StatusServiceUnavailable)
-		staticMetricCollector.Data["status"] = 0
-		staticMetricCollector.Data["duration"] = duration
-		registry.MustRegister(staticMetricCollector)
-		h := promhttp.HandlerFor(registry, promhttp.HandlerOpts{})
-		h.ServeHTTP(w, r)
+		//level.Warn(logger).Log("Failed to fetch JSON response. TARGET: "+target+", ERROR: "+err.Error())
+		http.Error(w, "Failed to fetch JSON response. TARGET: "+target+", ERROR: "+err.Error(), http.StatusServiceUnavailable)
 		return
 	}
 
-	staticMetricCollector.Data["status"] = 1
 	staticMetricCollector.Data["duration"] = duration
 
 	jsonMetricCollector.Data = data
